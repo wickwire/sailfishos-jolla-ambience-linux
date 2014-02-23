@@ -26,15 +26,30 @@ Translation source for a template ambience
 %prep
 %setup -q -n %{name}-%{version}
 
+# >> setup
+# << setup
+
 %build
+# >> build pre
+# << build pre
 
-%qmake5
+%qtc_qmake5
 
-make %{?jobs:-j%jobs}
+%qtc_make %{?_smp_mflags}
+
+# >> build post
+# << build post
 
 %install
 rm -rf %{buildroot}
+# >> install pre
+# << install pre
 %qmake5_install
+
+# >> install post
+# << install post
+
+
 
 %files
 %defattr(-,root,root,-)
